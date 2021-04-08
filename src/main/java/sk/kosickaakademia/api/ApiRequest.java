@@ -16,13 +16,25 @@ import java.util.Properties;
 public class ApiRequest {
 
     /**
-     * Returns Map Collection for rates passed by param
+     * Returns Map Collection for rates passed by param. If empty array or null is passed as argument,
+     * empty Map is returned.
      * @param rates an Array with selected exchange rates
-     * @return Map Collection of code as key and rate for value
+     * @return Map Collection of code as key and conversion rate for value
      * */
     public Map<String, Double> getExchangeRates(String[] rates){
-        //System.out.println(getRatesFromApi().toString());
-        return new HashMap<>();
+        Map<String, Double> map = new HashMap<>();
+
+        if (rates != null) {
+
+            JsonObject conversionRates = getRatesFromApi().getAsJsonObject("conversion_rates");
+            for (String temp :
+                    rates) {
+                if (conversionRates.has(temp))
+                    map.put(temp, conversionRates.get(temp).getAsDouble());
+            }
+        }
+
+        return map;
     }
 
     /**
