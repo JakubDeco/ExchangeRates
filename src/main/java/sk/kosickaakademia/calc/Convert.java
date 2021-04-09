@@ -5,7 +5,18 @@ import sk.kosickaakademia.api.ApiRequest;
 import java.util.Map;
 
 public class Convert {
+    private static String baseCurrency = "EUR";
     private final String[] myRates = {"EUR","USD","CZK","CAD"};
+
+
+    public static String getBaseCurrency() {
+        return baseCurrency;
+    }
+
+    public void setBaseCurrency(String baseCurrency) {
+        Convert.baseCurrency = baseCurrency;
+    }
+
 
     public void convert(double value){
         if (value <= 0) {

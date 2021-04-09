@@ -3,6 +3,7 @@ package sk.kosickaakademia.api;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import sk.kosickaakademia.calc.Convert;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +45,7 @@ public class ApiRequest {
     private JsonObject getRatesFromApi(){
         try {
             // Setting URL
-            String url_str = "https://v6.exchangerate-api.com/v6/"+ getApiKey() +"/latest/USD";
+            String url_str = "https://v6.exchangerate-api.com/v6/"+ getApiKey() +"/latest/"+ Convert.getBaseCurrency();
 
             // Making Request
             URL url = new URL(url_str);
