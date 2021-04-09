@@ -8,6 +8,9 @@ public class Convert {
     private static String baseCurrency = "EUR";
     private final String[] myRates = {"EUR","USD","CZK","CAD"};
 
+    public Convert(String baseCurrency) {
+        Convert.baseCurrency = baseCurrency;
+    }
 
     public static String getBaseCurrency() {
         return baseCurrency;
