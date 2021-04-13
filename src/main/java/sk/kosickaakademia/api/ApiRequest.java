@@ -25,13 +25,18 @@ public class ApiRequest {
     public Map<String, Double> getExchangeRates(String[] rates){
         Map<String, Double> map = new HashMap<>();
 
+        JsonObject conversionRates = getRatesFromApi().getAsJsonObject("conversion_rates");
         if (rates != null) {
 
-            JsonObject conversionRates = getRatesFromApi().getAsJsonObject("conversion_rates");
             for (String temp :
                     rates) {
                 if (conversionRates.has(temp))
                     map.put(temp, conversionRates.get(temp).getAsDouble());
+            }
+        } else {
+            for (Map.Entry<String, JsonElement> element :
+                    conversionRates.entrySet()) {
+                map.put(element.getKey(), element.getValue().getAsDouble());
             }
         }
 
