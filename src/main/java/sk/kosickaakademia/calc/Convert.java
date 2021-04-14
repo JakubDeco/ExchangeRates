@@ -1,6 +1,7 @@
 package sk.kosickaakademia.calc;
 
 import sk.kosickaakademia.api.ApiRequest;
+import sk.kosickaakademia.database.Database;
 
 import java.util.Map;
 
@@ -56,7 +57,13 @@ public class Convert {
             return 0;
 
         Double atRate = rates.get(toCurrency);
-        return atRate != null ? value * atRate : 0;
+        String baseCurrency = Convert.getBaseCurrency();
+        double result = atRate != null ? value * atRate : 0;
+
+        if (result != 0)
+            Database.insertApiRequest(baseCurrency,toCurrency,atRate,value);
+
+        return result;
     }
 
     private void printConversion(String from, String to, double eur, double result, double rate){
