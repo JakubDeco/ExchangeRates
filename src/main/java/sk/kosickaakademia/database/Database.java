@@ -6,6 +6,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Database {
     public static final MongoClient client = new MongoClient();
     public static final MongoDatabase database = client.getDatabase("exchangeRate");
@@ -17,6 +20,10 @@ public class Database {
         jsonObject.addProperty("to", to);
         jsonObject.addProperty("rate", rate);
         jsonObject.addProperty("amount", amount);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+        String date = sdf.format(new Date().getTime());
+        jsonObject.addProperty("date", date);
 
         Document document = Document.parse(jsonObject.toString());
 
