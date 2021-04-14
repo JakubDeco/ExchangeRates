@@ -48,7 +48,7 @@ public class FxController {
         double result = calc.convert(value,toCurrency,rates);
 
         showResult(result);
-        showRate(rates.get(Convert.getBaseCurrency()));
+        showRate(rates.get(toCurrency));
     }
 
     private void showRate(double value) {
