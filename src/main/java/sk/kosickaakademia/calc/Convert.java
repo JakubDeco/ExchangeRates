@@ -12,11 +12,13 @@ public class Convert {
         Convert.baseCurrency = baseCurrency;
     }
 
+    public Convert(){}
+
     public static String getBaseCurrency() {
         return baseCurrency;
     }
 
-    public void setBaseCurrency(String baseCurrency) {
+    public static void setBaseCurrency(String baseCurrency) {
         Convert.baseCurrency = baseCurrency;
     }
 
@@ -43,6 +45,18 @@ public class Convert {
             double result = value * entry.getValue();
             printConversion("EUR", entry.getKey(),value,result,entry.getValue());
         }
+    }
+
+    public double convert(double value, String toCurrency, Map<String, Double> rates){
+        if(value <= 0
+                || toCurrency == null
+                || toCurrency.isBlank()
+                || rates == null
+                || rates.isEmpty())
+            return 0;
+
+        Double atRate = rates.get(toCurrency);
+        return atRate != null ? value * atRate : 0;
     }
 
     private void printConversion(String from, String to, double eur, double result, double rate){
